@@ -1,45 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
   const [formData, setFormData] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
+    name: "",
+    username: "",
+    email: "",
+    password: "",
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormdata) => ({
+      ...prevFormdata,
       [name]: value,
     }));
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Make a POST request using fetch
-    fetch('https://your-backend-url.com/signup', {
-      method: 'POST',
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3001/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
-        return response.json();
+        return response.json()
       })
       .then((data) => {
         // Handle the response from the server
-        console.log('Success:', data);
+        console.log("Success:", data);
       })
       .catch((error) => {
         // Handle errors during the fetch
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
@@ -55,7 +52,6 @@ function App() {
                 className="form-control"
                 id="name"
                 name="name"
-                value={formData.name}
                 onChange={handleChange}
                 required
               />
