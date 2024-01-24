@@ -9,7 +9,7 @@ const appRouter = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/edit",
+    path: "/edit/:id",
     element: <Edit />,
   },
   {

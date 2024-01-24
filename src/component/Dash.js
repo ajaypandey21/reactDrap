@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Dash = () => {
   const [userData, setuserData] = useState([]);
@@ -36,6 +37,15 @@ const Dash = () => {
               <td>{user.username}</td>
               <td>{user.password}</td>
               <td>{user.email}</td>
+              <td>
+            <Link to={`/edit/${user._id}`} className="btn btn-primary mr-2">
+              Edit
+            </Link>
+            {/* <button onClick={() => handleDelete(user._id)} className="btn btn-danger">
+              Delete
+            </button> */}
+          </td>
+             
             </tr>
           ))}
         </tbody>
@@ -46,15 +56,3 @@ const Dash = () => {
 
 export default Dash;
 
-{
-  /* <tbody>
-    {userData.map((user, index) => (
-      <tr key={index}>
-        <td>{user.name}</td>
-        <td>{user.username}</td>
-        <td>{user.password}</td>
-        <td>{user.email}</td>
-      </tr>
-    ))}
-  </tbody> */
-}
