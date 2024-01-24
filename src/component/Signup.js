@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
+  const nav = useNavigate()
     const [formData, setFormData] = useState({
         name: "",
         username: "",
@@ -30,6 +32,7 @@ const Signup = () => {
           .then((response) => {
             // Handle the response from the server
             console.log("Success:", response.data);
+            nav("/dash")
           })
           .catch((error) => {
             // Handle errors during the request

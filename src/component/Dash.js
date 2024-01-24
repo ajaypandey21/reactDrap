@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dash = () => {
   const [userData, setuserData] = useState([]);
+  const nav = useNavigate()
 
   useEffect(() => {
     getData();
@@ -15,6 +16,17 @@ const Dash = () => {
       setuserData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+  };
+  const handleDelete = async (id) => {
+    try {
+      const delRes = await axios.delete(`http://localhost:3001/delete/${id}`);
+      console.log(delRes);
+      nav("/dash")
+      getData()
+
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
@@ -38,14 +50,16 @@ const Dash = () => {
               <td>{user.password}</td>
               <td>{user.email}</td>
               <td>
-            <Link to={`/edit/${user._id}`} className="btn btn-primary mr-2">
-              Edit
-            </Link>
-            {/* <button onClick={() => handleDelete(user._id)} className="btn btn-danger">
-              Delete
-            </button> */}
-          </td>
-             
+                <Link to={`/edit/${user._id}`} className="btn btn-primary mr-2">
+                  Edit
+                </Link>
+                <button
+                  onClick={()=>handleDelete(user._id)}
+                  className="btn btn-danger"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -55,4 +69,3 @@ const Dash = () => {
 };
 
 export default Dash;
-
