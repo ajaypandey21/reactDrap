@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment"
 
 const Dash = () => {
   const [userData, setuserData] = useState([]);
@@ -20,10 +21,11 @@ const Dash = () => {
   };
   const handleDelete = async (id) => {
     try {
-      const delRes = await axios.delete(`http://localhost:3001/delete/${id}`);
-      console.log(delRes);
-      nav("/dash")
-      getData()
+      await axios.delete(`http://localhost:3001/delete/${id}`);
+      console.log(`User with ID ${id} deleted successfully`);
+      // Wait for the deletion to complete before fetching the updated data
+      await getData();
+      nav("/dash");
 
     } catch (err) {
       console.log(err.message);
@@ -40,6 +42,8 @@ const Dash = () => {
             <th>Username</th>
             <th>Password</th>
             <th>Email</th>
+            <th>Created At</th>
+            <th>Modified</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +53,8 @@ const Dash = () => {
               <td>{user.username}</td>
               <td>{user.password}</td>
               <td>{user.email}</td>
+              <td>{moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')}</td>
+              <td>{moment(user.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</td>
               <td>
                 <Link to={`/edit/${user._id}`} className="btn btn-primary mr-2">
                   Edit

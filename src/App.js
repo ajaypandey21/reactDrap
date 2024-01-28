@@ -2,11 +2,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Signup from "./component/Signup";
 import Edit from "./component/Edit";
 import Dash from "./component/Dash";
+import Grapes from "./component/Grapes";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Signup />,
+    element: <Grapes />,
   },
   {
     path: "/edit/:id",
@@ -15,6 +16,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/dash",
     element: <Dash />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 ]);
 

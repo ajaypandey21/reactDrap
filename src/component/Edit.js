@@ -9,6 +9,8 @@ const Edit = () => {
   const { id } = useParams();
   useEffect(() => {
     getData();
+
+    // eslint-disable-next-line 
   }, [id]);
   const handleUpdate = async () => {
     try {
