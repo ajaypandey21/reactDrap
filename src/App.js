@@ -2,12 +2,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Signup from "./component/Signup";
 import Edit from "./component/Edit";
 import Dash from "./component/Dash";
-import Grapes from "./component/Grapes";
+import GrapesEditor from "./component/Grapes";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Grapes />,
+    element: <GrapesEditor />,
   },
   {
     path: "/edit/:id",
